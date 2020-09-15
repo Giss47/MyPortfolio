@@ -32,7 +32,7 @@ namespace MyPortfolio
             {
                 endpoints.MapGet("/", async context =>
                 {
-                    await context.Response.WriteAsync("Welcome to alyaditech...We coming up soon! Provided by Azure webb service");
+                    await context.Response.WriteAsync("Welcome to alyaditech...We coming up soon! Provided by Azure web service");
                 });
             });
         }
