@@ -9,40 +9,48 @@
     <link rel="icon" type="image/x-icon" href="images/icons/icon1.ico">
 </head>
 <body>
-    <div id="defaultpage">
-        <h1 id="defaultPageHeader">Welcome To My Humble Portfolio</h1>
-        <div id="container">
-            <img src="images/tech.jpg" alt="owner" class="center" id="myPhoto" />
-            <div id="layout">
-                <p class="layout title">Name</p>
-                <p class="layout content">Ghassan Alaydi</p>
-                <p class="layout title">Profession</p>
-                <p class="layout content">Full Stack Developer</p>
-                <p class="layout title">Expertise</p>
-                <p class="layout content">.Net Framework</p>
-            </div>
+    <h1 id="defaultPageHeader">Welcome To My Humble Portfolio</h1>
+    <div id="container">
+        <picture id="myPhoto">
+            <source media="(min-width: 760px)" srcset="images/tech.jpg">
+            <img src="images/tech-small.jpg" alt="webiste owner photo">
+        </picture>
+
+        <div id="layout">
+            <p class="layout title">Name</p>
+            <p class="layout content">Ghassan Alaydi</p>
+            <p class="layout title">Profession</p>
+            <p class="layout content">Full Stack Developer</p>
+            <p class="layout title">Expertise</p>
+            <ul class="layout content">
+                <li>.Net Framework</li>
+                <li>C#</li>
+                <li>Azure Cloud and DevOps</li>
+                <li>JavaScript</li>
+                <li>HTML & CSS</li>
+                <li>Elasticsearch & SQL</li>
+            </ul>
         </div>
-        <div id="webinfo">
-            <h2>About</h2>
-            <p>
-                <img class="icons" src="images/svg/asp.svg" />
-                This website is an ongoing project using ASP.Net Core
-            </p>
-            <p>
-                <img class="icons" src="images/svg/github.svg" alt="Github" />
-                To see source code navigate to my
-                <a href="https://github.com/Giss47/MyPortfolio" target="_blank">GitHub</a>
-                account
-            </p>
-            <p>
-                <img class="icons" src="images/svg/devops.svg" />
-                Azure DevOps used for Build/Deploy pipelines for CI/CD and integrated with GitHub
-            </p>
-            <p>
-                <img class="icons" src="images/svg/azure.svg" />
-                Azure App Services is hosting this web app at the moment
-            </p>
-        </div>
+    </div>
+    <div id="webinfo">
+        <h2>About</h2>
+        <p>
+            <img class="icons" src="images/svg/asp.svg" />
+            This website is an ongoing project using ASP.Net Core
+        </p>
+        <p>
+            <img class="icons" src="images/svg/github.svg" alt="Github" />
+            To see source code, please navigate to my
+            <a href="https://github.com/Giss47/MyPortfolio" target="_blank">GitHub</a>
+        </p>
+        <p>
+            <img class="icons" src="images/svg/devops.svg" />
+            Azure DevOps used for Build/Deploy pipelines for CI/CD and integrated with GitHub
+        </p>
+        <p>
+            <img class="icons" src="images/svg/azure.svg" />
+            Azure App Services is hosting this web app at the moment
+        </p>
     </div>
 </body>
 </html>

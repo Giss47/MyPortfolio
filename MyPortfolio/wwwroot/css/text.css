@@ -1,20 +1,17 @@
 ﻿body {
     background-color: #2c2e31;
+    background-image: url(/images/backgroundgray.jpg);
+    background-size: cover;
+    background-attachment: fixed;
+    background-repeat: no-repeat;
     color: white;
-    padding: 0;
+    padding: 2em;
     margin: 0;
     border: 0;
 }
 
 p {
     font-size: 2em;
-}
-
-#defaultpage {
-    background-image: url(/images/backgroundgray.jpg);
-    background-size: cover;
-    height: 100%;
-    padding: 1em;
 }
 
 #defaultPageHeader {
@@ -26,8 +23,8 @@ p {
 
 #layout {
     display: grid;
-    grid-template-rows: 4em 4em 4em;
-    grid-template-columns: 10em 7fr;
+    grid-template-rows: 4em 4em min-content;
+    grid-template-columns: 8em 7fr;
     align-self: center;
     width: 50vw;
 }
@@ -40,6 +37,12 @@ p {
 
 p.layout {
     font-size: 1.5em;
+}
+
+ul.layout {
+    font-size: 1.5em;
+    list-style-type: none;
+    padding: 0;
 }
 
 #webinfo {
