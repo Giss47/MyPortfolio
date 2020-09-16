@@ -3,6 +3,11 @@
   <PropertyGroup>
     <TargetFramework>netcoreapp3.1</TargetFramework>
     <UserSecretsId>4815eb1a-bcb4-4ae0-b812-e9cd8ceec478</UserSecretsId>
+    <ApplicationIcon>icon1.ico</ApplicationIcon>
   </PropertyGroup>
+
+  <ItemGroup>
+    <Folder Include="wwwroot\js\" />
+  </ItemGroup>
 
 </Project>

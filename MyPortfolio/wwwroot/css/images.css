@@ -1,0 +1,17 @@
+﻿#myPhoto {
+    opacity: 0.8;
+    border: 2px solid blue;
+    border-color: antiquewhite;
+    width: 15em;
+}
+
+.icons {
+    width: 2em;
+    margin-right: 0.5em;
+}
+
+.center {
+    display: block;
+    margin-right: 2em;
+    margin-left: 10%;
+}

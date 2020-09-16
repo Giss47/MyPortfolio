@@ -28,13 +28,21 @@ namespace MyPortfolio
 
             app.UseRouting();
 
-            app.UseEndpoints(endpoints =>
+            app.UseDefaultFiles();
+            app.UseStaticFiles();
+
+            app.Run(async (context) =>
             {
-                endpoints.MapGet("/", async context =>
-                {
-                    await context.Response.WriteAsync("Welcome to alyaditech...We coming up soon! Provided by Azure web service");
-                });
+                await context.Response.WriteAsync("Hello World");
             });
+
+            //app.UseEndpoints(endpoints =>
+            //{
+            //    endpoints.MapGet("/", async context =>
+            //    {
+            //        await context.Response.WriteAsync("Welcome to alyaditech...We coming up soon! Provided by Azure web service");
+            //    });
+            //});
         }
     }
 }
