@@ -24,7 +24,7 @@ p {
 #layout {
     display: grid;
     grid-template-rows: 4em 4em min-content;
-    grid-template-columns: 8em 7fr;
+    grid-template-columns: 8em auto;
     align-self: center;
     width: 50vw;
 }
@@ -33,6 +33,7 @@ p {
     display: flex;
     flex-direction: row;
     flex-wrap: wrap;
+    margin-left: 6vw;
 }
 
 p.layout {
