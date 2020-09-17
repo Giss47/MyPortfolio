@@ -7,10 +7,11 @@
 
 body {
     background-color: #522E46;
-    background-size: cover;
-    background-attachment: fixed;
-    background-repeat: no-repeat;
     color: white;
+    background-image: url(../../images/backgroundpink.png);
+    background-repeat: round;
+    background-size: contain;
+    background-attachment: fixed;
 }
 
 p {
@@ -76,6 +77,9 @@ ul.layout {
         #webinfo p a {
             margin-left: 0.25em;
             margin-right: 0.25em;
+            text-decoration: none;
+            color: white;
+            border-bottom: 2px dashed #D5706D;
         }
 
 .icons {
