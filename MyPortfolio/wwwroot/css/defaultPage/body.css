@@ -1,13 +1,16 @@
-﻿body {
-    background-color: #2c2e31;
-    background-image: url(/images/backgroundgray.jpg);
+﻿* {
+    margin: 0;
+    border: 0;
+    box-sizing: border-box;
+    /*outline: 2px solid black;*/
+}
+
+body {
+    background-color: #522E46;
     background-size: cover;
     background-attachment: fixed;
     background-repeat: no-repeat;
     color: white;
-    padding: 2em;
-    margin: 0;
-    border: 0;
 }
 
 p {
@@ -16,17 +19,9 @@ p {
 
 #defaultPageHeader {
     text-align: center;
-    padding: 2em 3em;
     font-size: 2em;
     -webkit-font-smoothing: antialiased;
-}
-
-#layout {
-    display: grid;
-    grid-template-rows: 4em 4em min-content;
-    grid-template-columns: 8em auto;
-    align-self: center;
-    width: 50vw;
+    margin-bottom: 2em;
 }
 
 #container {
@@ -34,6 +29,15 @@ p {
     flex-direction: row;
     flex-wrap: wrap;
     margin-left: 6vw;
+    margin-top: 3em;
+}
+
+#ownerId {
+    display: grid;
+    grid-template-rows: 4em 4em min-content;
+    grid-template-columns: 8em auto;
+    align-self: center;
+    width: 50vw;
 }
 
 p.layout {
@@ -47,7 +51,7 @@ ul.layout {
 }
 
 #webinfo {
-    margin-top: 2em;
+    margin: 2em;
 }
 
     #webinfo p {
@@ -55,6 +59,7 @@ ul.layout {
         display: flex;
         flex-direction: row;
         align-items: center;
+        margin: 1em 0;
     }
 
         #webinfo p a {

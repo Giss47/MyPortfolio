@@ -4,53 +4,64 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>AlaydiTech</title>
-    <link rel="stylesheet" href="css/images.css" />
-    <link rel="stylesheet" href="css/text.css" />
+    <link rel="stylesheet" href="css/defaultPage/header.css" />
+    <link rel="stylesheet" href="css/defaultPage/body.css" />
+    <link rel="stylesheet" href="css/defaultPage/images.css" />
     <link rel="icon" type="image/x-icon" href="images/icons/icon1.ico">
 </head>
 <body>
-    <h1 id="defaultPageHeader">Welcome To My Humble Portfolio</h1>
-    <div id="container">
-        <picture id="myPhoto">
-            <source media="(min-width: 760px)" srcset="images/tech.jpg">
-            <img src="images/tech-small.jpg" alt="webiste owner photo">
-        </picture>
-
-        <div id="layout">
-            <p class="layout title">Name</p>
-            <p class="layout content">Ghassan Alaydi</p>
-            <p class="layout title">Profession</p>
-            <p class="layout content">Full Stack Developer</p>
-            <p class="layout title">Expertise</p>
-            <ul class="layout content">
-                <li>.Net Framework</li>
-                <li>C#</li>
-                <li>Azure Cloud and DevOps</li>
-                <li>JavaScript</li>
-                <li>HTML & CSS</li>
-                <li>Elasticsearch & SQL</li>
-            </ul>
+    <header>
+        <img id="logo" src="/images/logo.png" alt="the website log" />
+        <h1 id="defaultPageHeader">Welcome To My Humble Portfolio</h1>
+        <nav>
+            <a href="../../images/cv.pdf" target="_blank">CV PDF</a>
+            <a href="https://www.linkedin.com/in/ghassan-alaydi-9a243248" target="_blank">LinkedIn</a>
+        </nav>
+    </header>
+    <main>
+        <div id="container">
+            <picture id="myPhotoFrame">
+                <source media="(min-width: 760px)" srcset="images/tech.jpg">
+                <img id="myPhoto" src="images/tech-small.jpg" alt="webiste owner photo">
+            </picture>
+            <div id="ownerId">
+                <p class="layout title">Name</p>
+                <p class="layout content">Ghassan Alaydi</p>
+                <p class="layout title">Profession</p>
+                <p class="layout content">Full Stack Developer</p>
+                <p class="layout title">Expertise</p>
+                <ul class="layout content">
+                    <li>.Net Framework</li>
+                    <li>C#</li>
+                    <li>Azure Cloud and DevOps</li>
+                    <li>JavaScript</li>
+                    <li>HTML & CSS</li>
+                    <li>Elasticsearch & SQL</li>
+                </ul>
+            </div>
         </div>
-    </div>
-    <div id="webinfo">
-        <h2>About</h2>
-        <p>
-            <img class="icons" src="images/svg/asp.svg" />
-            This website is an ongoing project using ASP.Net Core
-        </p>
-        <p>
-            <img class="icons" src="images/svg/github.svg" alt="Github" />
-            To see source code, please navigate to my
-            <a href="https://github.com/Giss47/MyPortfolio" target="_blank">GitHub</a>
-        </p>
-        <p>
-            <img class="icons" src="images/svg/devops.svg" />
-            Azure DevOps used for Build/Deploy pipelines, and is integrated with GitHub
-        </p>
-        <p>
-            <img class="icons" src="images/svg/azure.svg" />
-            Azure App Services is hosting this web app at the moment
-        </p>
-    </div>
+    </main>
+    <aside>
+        <div id="webinfo">
+            <h2>About</h2>
+            <p>
+                <img class="icons" src="images/svg/asp.svg" />
+                This website is a work in progress using ASP.Net Core
+            </p>
+            <p>
+                <img class="icons" src="images/svg/github.svg" alt="Github" />
+                To see source code, please navigate to my
+                <a href="https://github.com/Giss47/MyPortfolio" target="_blank">GitHub</a>
+            </p>
+            <p>
+                <img class="icons" src="images/svg/devops.svg" />
+                Azure DevOps used for Build/Deploy pipelines, and is integrated with GitHub
+            </p>
+            <p>
+                <img class="icons" src="images/svg/azure.svg" />
+                Azure App Services is hosting this web app at the moment
+            </p>
+        </div>
+    </aside>
 </body>
 </html>

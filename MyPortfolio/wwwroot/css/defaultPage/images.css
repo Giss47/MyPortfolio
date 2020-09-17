@@ -1,17 +1,19 @@
-﻿#myPhoto {
+﻿#logo {
+}
+
+#myPhotoFrame {
     opacity: 0.8;
     width: auto;
     display: block;
     margin-right: 2em;
+    border-radius: 50%;
+}
+
+#myPhoto {
+    border-radius: 30%;
 }
 
 .icons {
     width: 2em;
     margin-right: 0.5em;
-}
-
-.center {
-    display: block;
-    margin-right: 2em;
-    margin-left: 10%;
 }
