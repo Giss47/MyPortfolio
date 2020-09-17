@@ -32,6 +32,17 @@ p {
     margin-top: 3em;
 }
 
+#myPhotoFrame {
+    opacity: 0.8;
+    margin-right: 2em;
+    border-radius: 50%;
+    margin-bottom: 2em;
+}
+
+#myPhoto {
+    border-radius: 30%;
+}
+
 #ownerId {
     display: grid;
     grid-template-rows: 4em 4em min-content;
@@ -66,3 +77,8 @@ ul.layout {
             margin-left: 0.25em;
             margin-right: 0.25em;
         }
+
+.icons {
+    width: 2em;
+    margin-right: 0.5em;
+}

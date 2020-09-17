@@ -5,6 +5,10 @@
     flex-wrap: wrap
 }
 
+    header h1 {
+        padding: 1em;
+    }
+
 nav {
     margin-left: auto;
     margin-right: 3em;
