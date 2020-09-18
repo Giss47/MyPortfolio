@@ -2,6 +2,8 @@
 Asp.Net core web app
 
 Project Plan:
+* CI/CD with Azure DevOps
+* Azure Cloud as a Host
 * Default home page
 * MVC Employee management with Razor and SQL
 * SPA with React.JS 
