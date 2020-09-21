@@ -1,0 +1,27 @@
+﻿footer {
+    margin: 1em;
+    padding-bottom: 1em;
+    padding-top: 1em;
+    border-top: solid 2px #D5706D;
+}
+
+    footer div {
+        list-style-type: none;
+        display: flex;
+        flex-direction: row;
+        flex-wrap: wrap;
+        justify-content: center;
+    }
+
+    footer a {
+        text-decoration: none;
+        color: white;
+    }
+
+    footer p {
+        font-size: 1em;
+    }
+
+    footer div > * {
+        margin: 0 4em;
+    }
