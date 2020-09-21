@@ -6,8 +6,4 @@
     <ApplicationIcon>icon1.ico</ApplicationIcon>
   </PropertyGroup>
 
-  <ItemGroup>
-    <Folder Include="wwwroot\js\" />
-  </ItemGroup>
-
 </Project>
