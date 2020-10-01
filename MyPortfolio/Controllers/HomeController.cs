@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using MyPortfolio.Models;
+using MyPortfolio.ViewModels;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -16,15 +17,20 @@ namespace MyPortfolio.Controllers
             _employeeRepository = employeeRepository;
         }
 
-        public string Index()
+        public ViewResult Index()
         {
-            return _employeeRepository.GetEmployee(1).Name;
+            var model = _employeeRepository.GetAllEmployees();
+            return View(model);
         }
 
         public ViewResult Details()
         {
-            Employee model = _employeeRepository.GetEmployee(1);
-            return View(model);
+            HomeDetailsViewModel homeDetailsViewModel = new HomeDetailsViewModel()
+            {
+                Employee = _employeeRepository.GetEmployee(1),
+                PageTitle = "Employee Details"
+            };
+            return View(homeDetailsViewModel);
         }
     }
 }

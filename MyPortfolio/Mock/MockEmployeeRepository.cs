@@ -16,14 +16,19 @@ namespace MyPortfolio.Mock
             _employeeList = new List<Employee>()
             {
                 new Employee() { Id = 1, Name = "Mary", Department = "HR", Email = "mary@alayditech.com"},
-                new Employee() { Id = 1, Name = "John", Department = "IT", Email = "john@alayditech.com"},
-                new Employee() { Id = 1, Name = "Sam", Department = "IT", Email = "sam@alayditech.com"},
+                new Employee() { Id = 2, Name = "John", Department = "IT", Email = "john@alayditech.com"},
+                new Employee() { Id = 3, Name = "Sam", Department = "IT", Email = "sam@alayditech.com"},
             };
         }
 
         public Employee GetEmployee(int id)
         {
             return _employeeList.FirstOrDefault(e => e.Id == id);
+        }
+
+        public IEnumerable<Employee> GetAllEmployees()
+        {
+            return _employeeList;
         }
     }
 }
