@@ -1,10 +1,19 @@
-﻿@model MyPortfolio.ViewModels.HomeDetailsViewModel
+﻿@model HomeDetailsViewModel
+@{
+    ViewBag.Title = "Employee Details";
+}
 
-<html xmlns="http://www.w3.org/1999/xhtml">
-<head>
-    <title></title>
-</head>
-<body>
-    <h3>@Model.PageTitle</h3>
-</body>
-</html>
+<h3>@Model.PageTitle</h3>
+<div>
+    Name: @Model.Employee.Name
+</div>
+<div>
+    Name: @Model.Employee.Email
+</div>
+<div>
+    Name: @Model.Employee.Department
+</div>
+
+@section Scripts {
+    <script src="~/js/CustomScript.js"></script>
+}
