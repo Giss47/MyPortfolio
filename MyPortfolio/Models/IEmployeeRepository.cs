@@ -12,5 +12,7 @@ namespace MyPortfolio.Models
         IEnumerable<Employee> GetAllEmployees();
 
         Employee Add(Employee employee);
+
+        void Delete(int id);
     }
 }

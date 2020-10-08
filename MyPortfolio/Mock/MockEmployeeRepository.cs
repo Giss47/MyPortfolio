@@ -34,9 +34,15 @@ namespace MyPortfolio.Mock
 
         public Employee Add(Employee employee)
         {
-            employee.Id = _employeeList.Max(e => e.Id) + 1;
+            employee.Id = _employeeList.Count == 0 ? 1 : _employeeList.Max(e => e.Id) + 1;
             _employeeList.Add(employee);
             return employee;
+        }
+
+        public void Delete(int id)
+        {
+            var employee = _employeeList.Where(e => e.Id == id).FirstOrDefault();
+            _employeeList.Remove(employee);
         }
     }
 }

@@ -17,7 +17,7 @@ namespace MyPortfolio.Controllers
             _employeeRepository = employeeRepository;
         }
 
-        public ViewResult Index()
+        public ViewResult List()
         {
             var model = _employeeRepository.GetAllEmployees();
             return View(model);
@@ -45,10 +45,17 @@ namespace MyPortfolio.Controllers
             if (ModelState.IsValid)
             {
                 Employee newEmployee = _employeeRepository.Add(employee);
-                return RedirectToAction("details", new { id = newEmployee.Id });
+                return RedirectToAction("Details", new { id = newEmployee.Id });
             }
 
             return View();
+        }
+
+        public RedirectToActionResult Delete(int id)
+        {
+            _employeeRepository.Delete(id);
+
+            return RedirectToAction("List");
         }
     }
 }
