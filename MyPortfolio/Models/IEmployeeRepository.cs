@@ -13,6 +13,8 @@ namespace MyPortfolio.Models
 
         Employee Add(Employee employee);
 
-        void Delete(int id);
+        Employee Update(Employee employeeChanges);
+
+        Employee Delete(int id);
     }
 }

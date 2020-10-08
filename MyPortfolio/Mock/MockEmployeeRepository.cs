@@ -3,6 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.ComponentModel.Design;
 using System.Linq;
+using System.Net.Http.Headers;
 using System.Runtime.InteropServices.ComTypes;
 using System.Threading.Tasks;
 
@@ -39,10 +40,27 @@ namespace MyPortfolio.Mock
             return employee;
         }
 
-        public void Delete(int id)
+        public Employee Update(Employee employeeChanges)
+        {
+            var employee = _employeeList.Where(e => e.Id == employeeChanges.Id).FirstOrDefault();
+            if (employee != null)
+            {
+                employee.Name = employeeChanges.Name;
+                employee.Email = employeeChanges.Email;
+                employee.Department = employeeChanges.Department;
+            }
+
+            return employee;
+        }
+
+        public Employee Delete(int id)
         {
             var employee = _employeeList.Where(e => e.Id == id).FirstOrDefault();
-            _employeeList.Remove(employee);
+            if (employee != null)
+            {
+                _employeeList.Remove(employee);
+            }
+            return employee;
         }
     }
 }

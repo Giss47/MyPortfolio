@@ -3,6 +3,7 @@ using MyPortfolio.Models;
 using MyPortfolio.ViewModels;
 using System;
 using System.Collections.Generic;
+using System.Collections.Specialized;
 using System.Linq;
 using System.Threading.Tasks;
 
@@ -55,7 +56,7 @@ namespace MyPortfolio.Controllers
         {
             _employeeRepository.Delete(id);
 
-            return RedirectToAction("List");
+            return RedirectToAction(nameof(List));
         }
     }
 }
