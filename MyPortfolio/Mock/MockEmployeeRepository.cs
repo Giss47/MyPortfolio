@@ -3,6 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.ComponentModel.Design;
 using System.Linq;
+using System.Runtime.InteropServices.ComTypes;
 using System.Threading.Tasks;
 
 namespace MyPortfolio.Mock
@@ -15,9 +16,9 @@ namespace MyPortfolio.Mock
         {
             _employeeList = new List<Employee>()
             {
-                new Employee() { Id = 1, Name = "Mary", Department = "HR", Email = "mary@alayditech.com"},
-                new Employee() { Id = 2, Name = "John", Department = "IT", Email = "john@alayditech.com"},
-                new Employee() { Id = 3, Name = "Sam", Department = "IT", Email = "sam@alayditech.com"},
+                new Employee() { Id = 1, Name = "Mary", Department = Dept.Hr, Email = "mary@alayditech.com"},
+                new Employee() { Id = 2, Name = "John", Department = Dept.IT, Email = "john@alayditech.com"},
+                new Employee() { Id = 3, Name = "Sam", Department = Dept.IT, Email = "sam@alayditech.com"},
             };
         }
 
@@ -29,6 +30,13 @@ namespace MyPortfolio.Mock
         public IEnumerable<Employee> GetAllEmployees()
         {
             return _employeeList;
+        }
+
+        public Employee Add(Employee employee)
+        {
+            employee.Id = _employeeList.Max(e => e.Id) + 1;
+            _employeeList.Add(employee);
+            return employee;
         }
     }
 }
