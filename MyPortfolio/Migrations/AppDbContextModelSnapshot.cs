@@ -37,9 +37,35 @@ namespace MyPortfolio.Migrations
                         .HasColumnType("nvarchar(50)")
                         .HasMaxLength(50);
 
+                    b.Property<string>("PhotoPath")
+                        .HasColumnType("nvarchar(max)");
+
                     b.HasKey("Id");
 
                     b.ToTable("Employees");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = 1,
+                            Department = 1,
+                            Email = "mary@alayditech.com",
+                            Name = "Mary"
+                        },
+                        new
+                        {
+                            Id = 2,
+                            Department = 2,
+                            Email = "john@alayditech.com",
+                            Name = "John"
+                        },
+                        new
+                        {
+                            Id = 3,
+                            Department = 2,
+                            Email = "sam@alayditech.com",
+                            Name = "Sam"
+                        });
                 });
 #pragma warning restore 612, 618
         }

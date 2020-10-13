@@ -5,3 +5,8 @@
 .image-employee-Details {
     width: 25vw;
 }
+
+.imageThumbnail {
+    height: 250px;
+    width: auto;
+}

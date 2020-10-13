@@ -1,6 +1,10 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using Microsoft.AspNetCore.Hosting;
+using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.Metadata.Internal;
+using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Runtime.InteropServices.ComTypes;
 using System.Threading.Tasks;
@@ -10,10 +14,12 @@ namespace MyPortfolio.Models
     public class SQLEmployeeRepository : IEmployeeRepository
     {
         private readonly AppDbContext _context;
+        private readonly IWebHostEnvironment _webHostEnvironment;
 
-        public SQLEmployeeRepository(AppDbContext context)
+        public SQLEmployeeRepository(AppDbContext context, IWebHostEnvironment webHostEnvironment)
         {
             _context = context;
+            _webHostEnvironment = webHostEnvironment;
         }
 
         public Employee Add(Employee employee)
@@ -28,6 +34,13 @@ namespace MyPortfolio.Models
             var employee = _context.Employees.Find(id);
             if (employee != null)
             {
+                string uploadsFodler = Path.Combine(_webHostEnvironment.WebRootPath, "images\\employees");
+                string photoPath = employee.PhotoPath != null ?
+                    Path.Combine(uploadsFodler, employee.PhotoPath) : "";
+                if (File.Exists(photoPath))
+                {
+                    File.Delete(photoPath);
+                }
                 _context.Employees.Remove(employee);
                 _context.SaveChanges();
             }

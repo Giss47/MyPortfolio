@@ -28,10 +28,10 @@ namespace MyPortfolio
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddDbContextPool<AppDbContext>(options =>
-            options.UseSqlServer(_config.GetConnectionString("EmployeeDBConnectionLocal")));
+            options.UseSqlServer(_config.GetConnectionString("EmployeeDBConnection")));
             services.AddMvc();
             //services.AddScoped<IEmployeeRepository, SQLEmployeeRepository>();
-            services.AddSingleton<IEmployeeRepository, MockEmployeeRepository>();
+            services.AddScoped<IEmployeeRepository, SQLEmployeeRepository>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
