@@ -1,7 +1,7 @@
 ﻿@model HomeDetailsViewModel
 @{
     ViewBag.Title = "Employee Details";
-    var photoPath = "~/images/employees/" + (Model.Employee.PhotoPath ?? "noimage.jpg");
+    var photoPath = Environment.GetEnvironmentVariable("%HOME%") + (Model.Employee.PhotoPath ?? "noimage.jpg");
 
 }
 
