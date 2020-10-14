@@ -57,9 +57,9 @@ namespace MyPortfolio.Controllers
                 string uniqueFileName = null;
                 if (model.Photo != null)
                 {
-                    string uploadsFodler = Path.Combine(_webHostEnvironment.WebRootPath, "images\\employees");
+                    var uploadsFodler = System.Environment.SpecialFolder.CommonApplicationData;
                     uniqueFileName = Guid.NewGuid().ToString() + "_" + model.Photo.FileName;
-                    string filePath = Path.Combine(uploadsFodler, uniqueFileName);
+                    string filePath = Path.Combine(uploadsFodler.ToString(), uniqueFileName);
                     FileStream fileStream = new FileStream(filePath, FileMode.CreateNew);
                     model.Photo.CopyTo(fileStream);
                     fileStream.Dispose();
@@ -74,7 +74,7 @@ namespace MyPortfolio.Controllers
                 };
 
                 _employeeRepository.Add(newEmployee);
-                return RedirectToAction("Details", new { id = newEmployee.Id });
+                return RedirectToAction("Details", newEmployee.Id);
             }
 
             return View();
