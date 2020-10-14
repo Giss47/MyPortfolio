@@ -1,4 +1,10 @@
-﻿.btn {
+﻿.employeeList {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-around;
+}
+
+.btn {
     width: 75px;
 }
 
@@ -9,10 +15,4 @@
 .imageThumbnail {
     height: 250px;
     width: auto;
-}
-
-.employeeList {
-    display: flex !important;
-    flex-wrap: wrap;
-    justify-content: space-around;
 }
