@@ -55,13 +55,12 @@ namespace MyPortfolio.Controllers
                 string uniqueFileName = null;
                 if (model.Photo != null)
                 {
-                    //string uploadsFodler = Path.Combine(_webHostEnvironment.WebRootPath, "images\\employees");
-                    var homeDirectoryPath = Environment.GetEnvironmentVariable("%HOME%");
-
+                    string uploadsFodler = Path.Combine(_webHostEnvironment.WebRootPath, "images\\employees");
                     uniqueFileName = Guid.NewGuid().ToString() + "_" + model.Photo.FileName;
-                    string filePath = Path.Combine(homeDirectoryPath, uniqueFileName);
-                    using FileStream fileStream = new FileStream(filePath, FileMode.CreateNew);
+                    string filePath = Path.Combine(uploadsFodler, uniqueFileName);
+                    FileStream fileStream = new FileStream(filePath, FileMode.CreateNew);
                     model.Photo.CopyTo(fileStream);
+                    fileStream.Dispose();
                 }
 
                 var newEmployee = new Employee()

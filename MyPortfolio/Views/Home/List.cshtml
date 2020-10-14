@@ -4,10 +4,10 @@
 
 }
 
-<div class="employeeList">
+<div style="display: flex; flex-wrap:wrap" ">
     @foreach (var employee in Model)
     {
-        var photoPath = Environment.GetEnvironmentVariable("%HOME%") + (employee.PhotoPath ?? "noimage.jpg");
+        var photoPath = "~/images/employees/" + (employee.PhotoPath ?? "noimage.jpg");
 
         <div class="card m-3">
             <div class="card-header">
