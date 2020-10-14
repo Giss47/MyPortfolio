@@ -10,3 +10,9 @@
     height: 250px;
     width: auto;
 }
+
+.employeeList {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-around;
+}

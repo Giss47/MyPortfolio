@@ -27,6 +27,8 @@ namespace MyPortfolio.Controllers
 
         public ViewResult List()
         {
+            ViewBag.WebRootpath = _webHostEnvironment.WebRootPath;
+            ViewBag.ContentRootPath = _webHostEnvironment.ContentRootPath;
             var model = _employeeRepository.GetAllEmployees();
             return View(model);
         }
