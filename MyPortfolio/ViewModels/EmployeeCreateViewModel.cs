@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Http;
+using MyPortfolio.CustomValidationAttributes;
 using MyPortfolio.Models;
 using System;
 using System.Collections.Generic;
@@ -23,6 +24,8 @@ namespace MyPortfolio.ViewModels
         [Required]
         public Dept? Department { get; set; }
 
+        [AllowedExtensions(new string[] { ".jpg", ".jpeg", ".png" })]
+        [MaxFileSize(1000000)]
         public IFormFile Photo { get; set; }
     }
 }
