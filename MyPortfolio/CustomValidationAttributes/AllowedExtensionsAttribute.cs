@@ -1,4 +1,6 @@
 ﻿using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore.Storage.ValueConversion.Internal;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
@@ -20,16 +22,20 @@ namespace MyPortfolio.CustomValidationAttributes
         protected override ValidationResult IsValid(
         object value, ValidationContext validationContext)
         {
-            var file = value as IFormFile;
-            var extension = Path.GetExtension(file.FileName);
-            if (file != null)
+            if (value != null)
             {
-                if (!_extensions.Contains(extension.ToLower()))
+                var file = value as IFormFile;
+                var extension = Path.GetExtension(file.FileName);
+                if (file != null)
                 {
-                    return new ValidationResult(GetErrorMessage());
+                    if (!_extensions.Contains(extension.ToLower()))
+                    {
+                        return new ValidationResult(GetErrorMessage());
+                    }
                 }
-            }
 
+                return ValidationResult.Success;
+            }
             return ValidationResult.Success;
         }
 
