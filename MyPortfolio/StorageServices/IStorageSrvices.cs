@@ -8,7 +8,7 @@ namespace MyPortfolio.StorageServices
 {
     public interface IStorageSrvices
     {
-        void UploadFile(IFormFile file, string fileName);
+        string UploadFile(IFormFile file, string fileName);
 
         string Getpath(string fileName);
 

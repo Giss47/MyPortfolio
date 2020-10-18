@@ -35,6 +35,8 @@ p {
 
 #myPhoto {
     border-radius: 30%;
+    height: 25vh;
+    width: auto;
 }
 
 #ownerId {

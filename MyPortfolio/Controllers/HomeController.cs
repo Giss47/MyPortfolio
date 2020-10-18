@@ -65,11 +65,11 @@ namespace MyPortfolio.Controllers
         {
             if (ModelState.IsValid)
             {
-                string uniqueFileName = null;
+                string fileName = null;
+
                 if (model.Photo != null)
                 {
-                    uniqueFileName = Guid.NewGuid().ToString() + "_" + model.Photo.FileName;
-                    _storageSrvices.UploadFile(model.Photo, uniqueFileName);
+                    fileName = _storageSrvices.UploadFile(model.Photo, model.Photo.FileName);
                 }
 
                 var newEmployee = new Employee()
@@ -77,7 +77,7 @@ namespace MyPortfolio.Controllers
                     Name = model.Name,
                     Email = model.Email,
                     Department = model.Department,
-                    PhotoPath = uniqueFileName
+                    PhotoPath = fileName
                 };
 
                 _employeeRepository.Add(newEmployee);

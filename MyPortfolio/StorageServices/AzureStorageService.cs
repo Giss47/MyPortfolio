@@ -17,13 +17,16 @@ namespace MyPortfolio.Models
             _configuration = configuration;
         }
 
-        public void UploadFile(IFormFile file, string fileName)
+        public string UploadFile(IFormFile file, string fileName)
         {
             var container = GetContainer();
-
-            var newBlob = container.GetBlockBlobReference(fileName);
+            var uniqueFileName = Guid.NewGuid().ToString() + "_" + fileName;
+            var newBlob = container.GetBlockBlobReference(uniqueFileName);
             using var fileStream = file.OpenReadStream();
             newBlob.UploadFromStreamAsync(fileStream).Wait();
+            newBlob.Properties.CacheControl = "max-age=3600, must-revalidate";
+            newBlob.SetPropertiesAsync().Wait();
+            return uniqueFileName;
         }
 
         public string Getpath(string fileName)
