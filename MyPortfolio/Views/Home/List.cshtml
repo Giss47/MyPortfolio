@@ -1,13 +1,14 @@
 ﻿@model IEnumerable<Employee>
+@inject MyPortfolio.StorageServices.IStorageSrvices _sotrage
 @{
     ViewBag.Title = "Employee Management";
 
 }
 
-<div style="display: flex; flex-wrap:wrap">
+<div class="employeeList">
     @foreach (var employee in Model)
     {
-        var photoPath = "~/images/employees/" + (employee.PhotoPath ?? "noimage.jpg");
+        var photoPath = _sotrage.Getpath(employee.PhotoPath) ?? "~/images/employees/noimage.jpg";
 
         <div class="card m-3">
             <div class="card-header">

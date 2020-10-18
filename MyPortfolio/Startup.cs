@@ -11,6 +11,7 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using MyPortfolio.Mock;
 using MyPortfolio.Models;
+using MyPortfolio.StorageServices;
 
 namespace MyPortfolio
 {
@@ -30,8 +31,8 @@ namespace MyPortfolio
             services.AddDbContextPool<AppDbContext>(options =>
             options.UseSqlServer(_config.GetConnectionString("EmployeeDBConnection")));
             services.AddMvc();
-            //services.AddScoped<IEmployeeRepository, SQLEmployeeRepository>();
             services.AddScoped<IEmployeeRepository, SQLEmployeeRepository>();
+            services.AddScoped<IStorageSrvices, AzureStorageService>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

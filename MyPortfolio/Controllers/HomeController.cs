@@ -2,13 +2,17 @@
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Diagnostics;
+using Microsoft.Extensions.Configuration;
+using Microsoft.Extensions.Hosting;
 using MyPortfolio.Models;
+using MyPortfolio.StorageServices;
 using MyPortfolio.ViewModels;
 using System;
 using System.Collections.Generic;
 using System.Collections.Specialized;
 using System.IO;
 using System.Linq;
+using System.Net.WebSockets;
 using System.Threading.Tasks;
 
 namespace MyPortfolio.Controllers
@@ -17,12 +21,18 @@ namespace MyPortfolio.Controllers
     {
         private readonly IEmployeeRepository _employeeRepository;
         private readonly IWebHostEnvironment _webHostEnvironment;
+        private readonly IConfiguration _configuration;
+        private readonly IStorageSrvices _storageSrvices;
 
         public HomeController(IEmployeeRepository employeeRepository,
-                               IWebHostEnvironment webHostEnvironment)
+                               IWebHostEnvironment webHostEnvironment,
+                               IConfiguration configuration,
+                               IStorageSrvices storageSrvices)
         {
             _employeeRepository = employeeRepository;
             _webHostEnvironment = webHostEnvironment;
+            _configuration = configuration;
+            _storageSrvices = storageSrvices;
         }
 
         public ViewResult List()
@@ -33,11 +43,14 @@ namespace MyPortfolio.Controllers
 
         public ViewResult Details(int id)
         {
+            var employee = _employeeRepository.GetEmployee(id);
             HomeDetailsViewModel homeDetailsViewModel = new HomeDetailsViewModel()
             {
-                Employee = _employeeRepository.GetEmployee(id),
+                Employee = employee,
                 PageTitle = "Employee Details"
             };
+
+            ViewBag.Path = _storageSrvices.Getpath(employee.PhotoPath);
             return View(homeDetailsViewModel);
         }
 
@@ -55,12 +68,8 @@ namespace MyPortfolio.Controllers
                 string uniqueFileName = null;
                 if (model.Photo != null)
                 {
-                    string uploadsFodler = Path.Combine(_webHostEnvironment.WebRootPath, "images\\employees");
                     uniqueFileName = Guid.NewGuid().ToString() + "_" + model.Photo.FileName;
-                    string filePath = Path.Combine(uploadsFodler, uniqueFileName);
-                    FileStream fileStream = new FileStream(filePath, FileMode.CreateNew);
-                    model.Photo.CopyTo(fileStream);
-                    fileStream.Dispose();
+                    _storageSrvices.UploadFile(model.Photo, uniqueFileName);
                 }
 
                 var newEmployee = new Employee()
@@ -80,8 +89,9 @@ namespace MyPortfolio.Controllers
 
         public RedirectToActionResult Delete(int id)
         {
+            var fileName = _employeeRepository.GetEmployee(id).PhotoPath;
             _employeeRepository.Delete(id);
-
+            _storageSrvices.DeleteFile(fileName);
             return RedirectToAction(nameof(List));
         }
     }
