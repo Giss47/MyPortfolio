@@ -1,10 +1,12 @@
 ﻿using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.Configuration;
-using Microsoft.WindowsAzure.Storage;
-using Microsoft.WindowsAzure.Storage.Auth;
-using Microsoft.WindowsAzure.Storage.Blob;
 using MyPortfolio.StorageServices;
+using Azure.Storage.Blobs;
 using System;
+using Azure.Storage.Sas;
+using Azure.Storage;
+using Azure.Storage.Blobs.Specialized;
+using System.Drawing;
 
 namespace MyPortfolio.Models
 {
@@ -21,11 +23,9 @@ namespace MyPortfolio.Models
         {
             var container = GetContainer();
             var uniqueFileName = Guid.NewGuid().ToString() + "_" + fileName;
-            var newBlob = container.GetBlockBlobReference(uniqueFileName);
+            var newBlob = container.GetBlobClient(uniqueFileName);
             using var fileStream = file.OpenReadStream();
-            newBlob.UploadFromStreamAsync(fileStream).Wait();
-            newBlob.Properties.CacheControl = "max-age=3600, must-revalidate";
-            newBlob.SetPropertiesAsync().Wait();
+            newBlob.UploadAsync(fileStream).Wait();
             return uniqueFileName;
         }
 
@@ -33,16 +33,24 @@ namespace MyPortfolio.Models
         {
             if (fileName != null)
             {
+                var imagesAccesKey = Environment.GetEnvironmentVariable("ImagesAccessKey");
+                var storageName = _configuration.GetConnectionString("StorageName");
+                StorageSharedKeyCredential key = new StorageSharedKeyCredential(storageName, imagesAccesKey);
                 var container = GetContainer();
-                var blob = container.GetBlockBlobReference(fileName);
-                var sasToken = blob.GetSharedAccessSignature(new SharedAccessBlobPolicy()
+                var blob = container.GetBlobClient(fileName);
+                BlobSasBuilder sasBuilder = new BlobSasBuilder()
                 {
-                    Permissions = SharedAccessBlobPermissions.Read,
-                    SharedAccessExpiryTime = DateTime.UtcNow.AddHours(1)
-                });
-                var blobUrl = blob.Uri.AbsoluteUri + sasToken;
-                return blobUrl;
+                    BlobContainerName = container.Name,
+                    BlobName = blob.Name,
+                    Resource = "b",
+                };
+                sasBuilder.StartsOn = DateTimeOffset.UtcNow;
+                sasBuilder.ExpiresOn = DateTimeOffset.UtcNow.AddMinutes(1);
+                sasBuilder.SetPermissions(BlobContainerSasPermissions.Read);
+                string sasToken = sasBuilder.ToSasQueryParameters(key).ToString();
+                return $"{container.GetBlockBlobClient(blob.Name).Uri}?{sasToken}";
             }
+
             return fileName;
         }
 
@@ -51,20 +59,17 @@ namespace MyPortfolio.Models
             if (fileName != null)
             {
                 var container = GetContainer();
-                var blob = container.GetBlockBlobReference(fileName);
+                var blob = container.GetBlobClient(fileName);
                 blob.DeleteAsync().Wait();
             }
         }
 
-        private CloudBlobContainer GetContainer()
+        private BlobContainerClient GetContainer()
         {
-            var accountName = _configuration.GetSection("Accounts")["AzureStorageAccount"];
-            var accountKey = _configuration.GetConnectionString("ImagesAccessKey");
-            var storageCredentials = new StorageCredentials(accountName, accountKey);
-            var cloudStorageAccount = new CloudStorageAccount(storageCredentials, true);
-            var cloudBlobClient = cloudStorageAccount.CreateCloudBlobClient();
-            var container = cloudBlobClient.GetContainerReference("employeesimages");
-            return container;
+            var connectionString = Environment.GetEnvironmentVariable("AzureBlobStorage");
+            var blobServiceClient = new BlobServiceClient(connectionString);
+            var containerClient = blobServiceClient.GetBlobContainerClient("employeesimages");
+            return containerClient;
         }
     }
 }

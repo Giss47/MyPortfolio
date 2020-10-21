@@ -33,6 +33,7 @@ namespace MyPortfolio.Controllers
 
         public ViewResult Details(int id)
         {
+            //throw new System.Exception();
             var employee = _employeeRepository.GetEmployee(id);
             if (employee == null)
             {
@@ -123,12 +124,11 @@ namespace MyPortfolio.Controllers
                 employee.Name = model.Name;
                 employee.Email = model.Email;
                 employee.Department = model.Department;
-                string fileName = null;
 
                 if (model.Photo != null)
                 {
-                    fileName = _storageSrvices.UploadFile(model.Photo, model.Photo.FileName);
-                    employee.PhotoPath = fileName;
+                    string uniqueFileName = _storageSrvices.UploadFile(model.Photo, model.Photo.FileName);
+                    employee.PhotoPath = uniqueFileName;
                     _storageSrvices.DeleteFile(model.ExistingPhotoPath);
                 }
 
