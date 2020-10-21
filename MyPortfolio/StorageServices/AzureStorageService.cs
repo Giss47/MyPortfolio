@@ -33,7 +33,7 @@ namespace MyPortfolio.Models
         {
             if (fileName != null)
             {
-                var imagesAccesKey = Environment.GetEnvironmentVariable("ImagesAccessKey");
+                var imagesAccesKey = _configuration.GetConnectionString("ImagesAccessKey");
                 var storageName = _configuration.GetConnectionString("StorageName");
                 StorageSharedKeyCredential key = new StorageSharedKeyCredential(storageName, imagesAccesKey);
                 var container = GetContainer();
@@ -66,7 +66,7 @@ namespace MyPortfolio.Models
 
         private BlobContainerClient GetContainer()
         {
-            var connectionString = Environment.GetEnvironmentVariable("AzureBlobStorage");
+            var connectionString = _configuration.GetConnectionString("AzureBlobStorage");
             var blobServiceClient = new BlobServiceClient(connectionString);
             var containerClient = blobServiceClient.GetBlobContainerClient("employeesimages");
             return containerClient;
