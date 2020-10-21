@@ -1,19 +1,9 @@
-﻿using Microsoft.AspNetCore.Builder;
-using Microsoft.AspNetCore.Hosting;
+﻿using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.AspNetCore.Mvc.Diagnostics;
 using Microsoft.Extensions.Configuration;
-using Microsoft.Extensions.Hosting;
 using MyPortfolio.Models;
 using MyPortfolio.StorageServices;
 using MyPortfolio.ViewModels;
-using System;
-using System.Collections.Generic;
-using System.Collections.Specialized;
-using System.IO;
-using System.Linq;
-using System.Net.WebSockets;
-using System.Threading.Tasks;
 
 namespace MyPortfolio.Controllers
 {
@@ -50,6 +40,8 @@ namespace MyPortfolio.Controllers
                 PageTitle = "Employee Details"
             };
 
+            // I use this techniqe because Of SAS key Added to blob when using AzureStorage Service
+            // Which varied everytime
             ViewBag.Path = _storageSrvices.Getpath(employee.PhotoPath);
             return View(homeDetailsViewModel);
         }
@@ -93,6 +85,49 @@ namespace MyPortfolio.Controllers
             _employeeRepository.Delete(id);
             _storageSrvices.DeleteFile(fileName);
             return RedirectToAction(nameof(List));
+        }
+
+        [HttpGet]
+        public ViewResult Edit(int id)
+        {
+            var employee = _employeeRepository.GetEmployee(id);
+            EmployeeEditViewModel model = new EmployeeEditViewModel()
+            {
+                Id = employee.Id,
+                Name = employee.Name,
+                Email = employee.Email,
+                Department = employee.Department,
+                ExistingPhotoPath = employee.PhotoPath
+            };
+
+            ViewBag.Path = _storageSrvices.Getpath(employee.PhotoPath);
+            return View(model);
+        }
+
+        [HttpPost]
+        public IActionResult Edit(EmployeeEditViewModel model)
+        {
+            if (ModelState.IsValid)
+            {
+                Employee employee = _employeeRepository.GetEmployee(model.Id);
+                employee.Name = model.Name;
+                employee.Email = model.Email;
+                employee.Department = model.Department;
+                string fileName = null;
+
+                if (model.Photo != null)
+                {
+                    fileName = _storageSrvices.UploadFile(model.Photo, model.Photo.FileName);
+                    employee.PhotoPath = fileName;
+                    _storageSrvices.DeleteFile(model.ExistingPhotoPath);
+                }
+
+                _employeeRepository.Update(employee);
+
+                return RedirectToAction("Details", new { id = employee.Id });
+            }
+
+            return View();
         }
     }
 }
