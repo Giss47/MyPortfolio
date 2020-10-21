@@ -34,6 +34,11 @@ namespace MyPortfolio.Controllers
         public ViewResult Details(int id)
         {
             var employee = _employeeRepository.GetEmployee(id);
+            if (employee == null)
+            {
+                Response.StatusCode = 404;
+                return View("EmployeeNotFound", id);
+            }
             HomeDetailsViewModel homeDetailsViewModel = new HomeDetailsViewModel()
             {
                 Employee = employee,
@@ -91,6 +96,11 @@ namespace MyPortfolio.Controllers
         public ViewResult Edit(int id)
         {
             var employee = _employeeRepository.GetEmployee(id);
+            if (employee == null)
+            {
+                Response.StatusCode = 404;
+                return View("EmployeeNotFound", id);
+            }
             EmployeeEditViewModel model = new EmployeeEditViewModel()
             {
                 Id = employee.Id,

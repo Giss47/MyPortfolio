@@ -1,4 +1,9 @@
-﻿.employeeList {
+﻿* {
+    margin: 0;
+    padding: 0
+}
+
+.employeeList {
     display: flex;
     flex-wrap: wrap;
     justify-content: space-around;
@@ -16,4 +21,9 @@
 .imageThumbnail {
     height: 250px;
     width: auto;
+}
+
+.NotFoundPageBtn {
+    width: auto;
+    margin: 1em 0;
 }
