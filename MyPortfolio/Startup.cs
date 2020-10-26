@@ -5,6 +5,7 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
@@ -32,7 +33,10 @@ namespace MyPortfolio
             options.UseSqlServer(_config.GetConnectionString("EmployeeDBConnection")));
             services.AddMvc();
             services.AddScoped<IEmployeeRepository, SQLEmployeeRepository>();
-            services.AddScoped<IStorageSrvices, AzureStorageService>();
+            services.AddScoped<IStorageSrvices, LocalStorageService>();
+
+            services.AddIdentity<IdentityUser, IdentityRole>()
+                .AddEntityFrameworkStores<AppDbContext>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -50,6 +54,8 @@ namespace MyPortfolio
 
             app.UseDefaultFiles();
             app.UseStaticFiles();
+
+            app.UseAuthentication();
 
             app.UseRouting();
 
