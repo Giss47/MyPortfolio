@@ -32,7 +32,7 @@ namespace MyPortfolio
             options.UseSqlServer(_config.GetConnectionString("EmployeeDBConnection")));
             services.AddMvc();
             services.AddScoped<IEmployeeRepository, SQLEmployeeRepository>();
-            services.AddScoped<IStorageSrvices, LocalStorageService>();
+            services.AddScoped<IStorageSrvices, AzureStorageService>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
