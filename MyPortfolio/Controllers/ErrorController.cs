@@ -44,7 +44,7 @@ namespace MyPortfolio.Controllers
         {
             var exceptionDetails = HttpContext.Features.Get<IExceptionHandlerPathFeature>();
 
-            _logger.LogError($"The path {exceptionDetails.Path} thew an exception " +
+            _logger.LogError($"The path {exceptionDetails.Path} threw an exception " +
                 $"{exceptionDetails.Error}");
 
             return View("Error");
