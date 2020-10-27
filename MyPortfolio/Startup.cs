@@ -35,8 +35,11 @@ namespace MyPortfolio
             services.AddScoped<IEmployeeRepository, SQLEmployeeRepository>();
             services.AddScoped<IStorageSrvices, AzureStorageService>();
 
-            services.AddIdentity<IdentityUser, IdentityRole>()
-                .AddEntityFrameworkStores<AppDbContext>();
+            services.AddIdentity<IdentityUser, IdentityRole>(options =>
+            {
+                options.Password.RequiredLength = 7;
+                options.Password.RequiredUniqueChars = 2;
+            }).AddEntityFrameworkStores<AppDbContext>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
