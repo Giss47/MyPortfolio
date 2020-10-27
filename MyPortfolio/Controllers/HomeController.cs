@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Hosting;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
 using MyPortfolio.Models;
@@ -26,12 +27,14 @@ namespace MyPortfolio.Controllers
             _storageSrvices = storageSrvices;
         }
 
+        [AllowAnonymous]
         public ViewResult List()
         {
             var model = _employeeRepository.GetAllEmployees();
             return View(model);
         }
 
+        [AllowAnonymous]
         public ViewResult Details(int id)
         {
             //throw new System.Exception();

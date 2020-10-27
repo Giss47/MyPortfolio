@@ -2,10 +2,12 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Mvc.Authorization;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
@@ -13,6 +15,7 @@ using Microsoft.Extensions.Hosting;
 using MyPortfolio.Mock;
 using MyPortfolio.Models;
 using MyPortfolio.StorageServices;
+using NLog.Time;
 
 namespace MyPortfolio
 {
@@ -31,7 +34,13 @@ namespace MyPortfolio
         {
             services.AddDbContextPool<AppDbContext>(options =>
             options.UseSqlServer(_config.GetConnectionString("EmployeeDBConnection")));
-            services.AddMvc();
+
+            services.AddMvc(options =>
+            {
+                var policy = new AuthorizationPolicyBuilder().RequireAuthenticatedUser().Build();
+                options.Filters.Add(new AuthorizeFilter(policy));
+            });
+
             services.AddScoped<IEmployeeRepository, SQLEmployeeRepository>();
             services.AddScoped<IStorageSrvices, AzureStorageService>();
 
@@ -61,6 +70,7 @@ namespace MyPortfolio
             app.UseAuthentication();
 
             app.UseRouting();
+            app.UseAuthorization();
 
             app.UseEndpoints(endpoints =>
             {
