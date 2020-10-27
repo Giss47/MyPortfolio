@@ -80,6 +80,7 @@ namespace MyPortfolio.Controllers
                 };
 
                 _employeeRepository.Add(newEmployee);
+
                 return RedirectToAction("Details", new { id = newEmployee.Id });
             }
 
