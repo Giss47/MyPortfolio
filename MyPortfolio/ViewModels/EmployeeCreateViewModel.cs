@@ -13,7 +13,7 @@ namespace MyPortfolio.ViewModels
 
         [Required]
         [RegularExpression(@"^[a-zA-Z0-9_.+-]+@alayditech.com",
-            ErrorMessage = "Invalid Office Email Format")]
+            ErrorMessage = "Email domain must be alayditech.com")]
         [Display(Name = "Office Email")]
         public string Email { get; set; }
 
