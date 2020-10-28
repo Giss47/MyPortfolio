@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Runtime.InteropServices.WindowsRuntime;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
@@ -73,7 +74,7 @@ namespace MyPortfolio.Controllers
 
         [HttpPost]
         [AllowAnonymous]
-        public async Task<IActionResult> Login(LoginViewModel model)
+        public async Task<IActionResult> Login(LoginViewModel model, string returnUrl)
         {
             if (ModelState.IsValid)
             {
@@ -81,6 +82,11 @@ namespace MyPortfolio.Controllers
 
                 if (result.Succeeded)
                 {
+                    if (!string.IsNullOrEmpty(returnUrl) && Url.IsLocalUrl(returnUrl))
+                    {
+                        return Redirect(returnUrl);
+                    }
+
                     return RedirectToAction("list", "home");
                 }
 
