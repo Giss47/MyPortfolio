@@ -42,7 +42,7 @@ namespace MyPortfolio
             });
 
             services.AddScoped<IEmployeeRepository, SQLEmployeeRepository>();
-            services.AddScoped<IStorageSrvices, LocalStorageService>();
+            services.AddScoped<IStorageSrvices, AzureStorageService>();
 
             services.AddIdentity<IdentityUser, IdentityRole>(options =>
             {
