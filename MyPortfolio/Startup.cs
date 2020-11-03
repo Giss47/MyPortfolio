@@ -44,7 +44,7 @@ namespace MyPortfolio
             services.AddScoped<IEmployeeRepository, SQLEmployeeRepository>();
             services.AddScoped<IStorageSrvices, AzureStorageService>();
 
-            services.AddIdentity<IdentityUser, IdentityRole>(options =>
+            services.AddIdentity<ApplicationUser, IdentityRole>(options =>
             {
                 options.Password.RequiredLength = 7;
                 options.Password.RequiredUniqueChars = 2;

@@ -25,5 +25,8 @@ namespace MyPortfolio.ViewModels
         [Compare("Password",
             ErrorMessage = "Password and confirmation password do not match.")]
         public string ConfirmPassword { get; set; }
+
+        [MaxLength(30, ErrorMessage = "City connot exceed 30 characters")]
+        public string City { get; set; }
     }
 }
