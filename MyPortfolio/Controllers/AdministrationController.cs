@@ -9,7 +9,6 @@ using System.Threading.Tasks;
 
 namespace MyPortfolio.Controllers
 {
-    [Authorize(Roles = "Admin")]
     public class AdministrationController : Controller
     {
         private readonly RoleManager<IdentityRole> _roleManager;
