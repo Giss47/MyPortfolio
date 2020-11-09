@@ -1,12 +1,11 @@
-﻿using Microsoft.AspNetCore.Http;
+﻿using Azure.Storage;
+using Azure.Storage.Blobs;
+using Azure.Storage.Blobs.Specialized;
+using Azure.Storage.Sas;
+using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.Configuration;
 using MyPortfolio.StorageServices;
-using Azure.Storage.Blobs;
 using System;
-using Azure.Storage.Sas;
-using Azure.Storage;
-using Azure.Storage.Blobs.Specialized;
-using System.Drawing;
 
 namespace MyPortfolio.Models
 {

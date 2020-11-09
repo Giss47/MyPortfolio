@@ -1,11 +1,8 @@
 ﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.VisualBasic;
 using MyPortfolio.Models;
 using MyPortfolio.ViewModels;
-using NLog.LayoutRenderers;
-using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;

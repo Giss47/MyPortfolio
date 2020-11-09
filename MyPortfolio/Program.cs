@@ -2,7 +2,6 @@ using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Hosting;
 using NLog.Web;
 using System;
-using System.ComponentModel.Design;
 
 namespace MyPortfolio
 {
